@@ -1,0 +1,62 @@
+---
+title: "JL simulations"
+output: html_notebook
+---
+
+```{r}
+source("dose_finding_functions/dose_finding_functions_JL.R")
+source("dose_finding_functions/dose_finding_util.R")
+#source("dose_finding_functions/bi-variate_probit_functions.R")
+```
+
+
+# Set prior values for the simulations as well as the inputs for the simulation function
+```{r}
+pe_prior = c(0.2,0.3,0.4,0.5,0.6)
+pt_prior = c(0.05,0.1,0.2,0.3,0.35)
+m = 1
+#beta distribution prior efficacy
+ae = c(0.2, 0.3, 0.4, 0.5, 0.6)
+be = c(0.8, 0.7, 0.6, 0.5, 0.4)
+#beta distribution prior toxicity
+at = c(0.05, 0.1 ,0.2, 0.3, 0.35)
+bt = c(0.95, 0.9, 0.8, 0.7, 0.65)
+cohort_size = 3
+gam = 3
+cohorts = 16
+nsteps = 10000
+burnin = 5000
+nsims = 100
+count = 0
+Ce = 0.8
+Ct = 0.8
+phi_e = 0.2
+phi_t = 0.3
+```
+
+```{r}
+pe_scen1 = c(0.28, 0.3, 0.44, 0.6, 0.74)
+pt_scen1 = c(0.15, 0.32, 0.45, 0.55, 0.62)
+scenario1 = JL_simulation(starter_dose = 1, pe_true = pe_scen1, pt_true = pt_scen1, pe_prior = pe_prior, pt_prior = pt_prior,  posterior_function_E= posterior_function_E, posterior_function_T =posterior_function_T , cohorts = cohorts, cohort_size = cohort_size, burnin = burnin, nsteps = nsteps, nsims = nsims, Ce = Ce, Ct = Ct)
+scenario1
+```
+
+```{r}
+pe_scen2 = c(0.1, 0.27, 0.44, 0.58, 0.69)
+pt_scen2 = c(0.04, 0.18, 0.37, 0.54, 0.67)
+scenario2 = full_algorithm(starter_dose = 1, pe_true = pe_scen2, pt_true = pt_scen2, pe_prior = pe_prior, pt_prior = pt_prior, posterior_function_E =posterior_function_E , posterior_function_T = posterior_function_T, cohorts = cohorts, cohort_size = cohort_size, burnin = burnin,nsteps = nsteps, nsims = nsims, Ce =Ce, Ct =Ct)
+scenario2
+```
+
+```{r}
+pe_scen3 = c(0.05, 0.08, 0.15, 0.28, 0.43)
+pt_scen3 = c(0.02, 0.05, 0.07, 0.10, 0.12)
+scenario3 = full_algorithm1(starter_dose = 1, pe_true = pe_scen3, pt_true = pt_scen3, pe_prior = pe_prior, pt_prior = pt_prior, posterior_function_E =posterior_function_E , posterior_function_T = posterior_function_T, cohorts = cohorts, cohort_size = cohort_size, burnin = burnin, nsteps = nsteps, nsims = n_sims, Ce =Ce, Ct =Ct)
+scenario3
+```
+
+
+
+
+
+

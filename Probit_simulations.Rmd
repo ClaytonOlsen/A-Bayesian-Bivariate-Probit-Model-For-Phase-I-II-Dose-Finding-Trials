@@ -1,0 +1,65 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+---
+title: "Probit Simulations"
+output: html_notebook
+---
+
+```{r}
+source("dose_finding_functions/dose_finding_util.R")
+source("dose_finding_functions/bi-variate_probit_functions.R")
+```
+
+
+# Set prior values for the simulations as well as the inputs for the simulation function
+```{r}
+p_start = 0.5
+t_E1= 0.5
+t_T1 = 0.5
+t_E2= 0.35
+t_T2 = 0.35
+alpha_E_bar = c(-0.84, 0.317, 0.255, 0.255, 0.255)
+alpha_T_bar = c(-1.665, 0.34, 0.44, 0.31, 0.15)
+ap =0.5
+bp = 0.5
+cohort_size = 3
+cohorts = 16
+nsteps = 4000
+burnin = 1000
+nsims = 2
+count = 0
+Ce = 0.8
+Ct = 0.8
+phi_e = 0.2
+phi_t = 0.3
+```
+
+```{r}
+pe_scen1 = c(0.28, 0.3, 0.44, 0.6, 0.74)
+pt_scen1 = c(0.15, 0.32, 0.45, 0.55, 0.62)
+scen1 = full_algorithm_probit(starter_dose = 1, pe_true = pe_scen1, pt_true = pt_scen1, p_start = p_start, alpha_E_bar = alpha_E_bar, alpha_T_bar = alpha_T_bar, cohorts = cohorts, cohort_size = cohort_size, burnin = burnin, nsteps = nsteps, nsims = nsims, Ce = Ce, Ct = Ct)
+scen1
+```
+
+```{r}
+pe_scen1 = c(0.28, 0.3, 0.44, 0.6, 0.74)
+pt_scen1 = c(0.15, 0.32, 0.45, 0.55, 0.62)
+scen1 = full_algorithm_probit(starter_dose = 1, pe_true = pe_scen1, pt_true = pt_scen1, p_start = p_start, alpha_E_bar = alpha_E_bar, alpha_T_bar = alpha_T_bar, cohorts = 16, cohort_size = cohort_size, burnin = burnin, nsteps = nsteps, nsims = nsims, Ce = Ce, Ct = Ct)
+scen1
+```
+
+```{r}
+pe_scen1 = c(0.28, 0.3, 0.44, 0.6, 0.74)
+pt_scen1 = c(0.15, 0.32, 0.45, 0.55, 0.62)
+scen1 = full_algorithm_probit(starter_dose = 1, pe_true = pe_scen1, pt_true = pt_scen1, p_start = p_start, alpha_E_bar = alpha_E_bar, alpha_T_bar = alpha_T_bar, cohorts = 16, cohort_size = cohort_size, burnin = burnin, nsteps = nsteps, nsims = nsims, Ce = Ce, Ct = Ct)
+scen1
+```
+
+
+
+
+
+
